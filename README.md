@@ -1,4 +1,4 @@
-## Hi there 👋
+![Hi There, I'm Rob — pixel-art Mona juggling a soccer ball on the left and a waving hand on the right](assets/mona-soccer-banner.gif)
 
 <!--
 **olorcain/olorcain** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
