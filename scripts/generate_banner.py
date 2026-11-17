@@ -2,6 +2,7 @@
 
 Requires Pillow 11.3.0. All sprites and lettering are drawn here on a pixel grid.
 Mona is GitHub's mascot; this is an original fan-art interpretation.
+Character reference: https://avatars.githubusercontent.com/u/92997159?v=4
 """
 
 import math
@@ -16,9 +17,9 @@ FRAMES = 36
 BACKGROUND = "#101923"
 MINT = "#9aefc0"
 INK = "#151d29"
-OUTLINE = "#52677e"
-CREAM = "#ffdabd"
-FUR = "#233247"
+OUTLINE = "#34414d"
+CREAM = "#f6cbb0"
+FUR = "#070a0e"
 
 LETTERS = {
     "H": ("10001", "10001", "10001", "11111", "10001", "10001", "10001"),
@@ -63,61 +64,62 @@ def mona(frame):
     phase = (frame % 36) / 36
     kick = round(8 * max(0, math.cos(math.tau * phase)) ** 6)
     # Five tentacles, including a curled tail and the raised juggling foot.
-    draw.line([(35, 83), (23, 89), (12, 88), (6, 82), (6, 74), (11, 70), (17, 72)],
+    tail = [(39, 84), (29, 89), (19, 88), (12, 84), (7, 76), (3, 73), (0, 73)]
+    draw.line(tail,
               fill=OUTLINE, width=9)
-    draw.line([(35, 83), (23, 89), (12, 88), (6, 82), (6, 74), (11, 70), (17, 72)],
-              fill=FUR, width=5)
+    draw.line(tail, fill=FUR, width=7)
+    for x, y in ((2, 72), (8, 76), (13, 82), (20, 86), (27, 86)):
+        draw.rectangle((x, y, x + 2, y + 1), fill="#a5d9d4")
     for points in (
-        [(41, 87), (35, 99), (26, 102), (20, 100)],
-        [(49, 88), (48, 105), (40, 108), (35, 106)],
-        [(58, 88), (62, 103), (70, 105), (75, 102)],
-        [(65, 85), (78, 98), (98, 108 - kick), (110, 110 - kick)],
+        [(42, 77), (40, 97), (36, 105), (28, 108)],
+        [(49, 79), (49, 102), (46, 109), (39, 111)],
+        [(59, 79), (59, 102), (62, 109), (69, 111)],
+        [(67, 77), (69, 98), (98, 108 - kick), (110, 110 - kick)],
     ):
-        draw.line(points, fill=OUTLINE, width=10)
-        draw.line(points, fill=FUR, width=6)
-    draw.ellipse((34, 65, 70, 97), fill=OUTLINE)
-    draw.ellipse((36, 66, 68, 95), fill=FUR)
-    draw.rectangle((44, 80, 60, 94), fill="#344b60")
-    for x, y in ((27, 100), (41, 105), (68, 102), (99, 108 - kick)):
-        draw.rectangle((x, y, x + 3, y + 2), fill="#b4bad0")
+        draw.line(points, fill=OUTLINE, width=9)
+        draw.line(points, fill=FUR, width=7)
+    draw.ellipse((37, 61, 71, 88), fill=OUTLINE)
+    draw.ellipse((38, 62, 70, 87), fill=FUR)
 
     silhouette = [
-        (18, 30), (16, 11), (19, 3), (29, 7), (38, 15),
-        (62, 15), (74, 6), (83, 4), (86, 13), (83, 32),
-        (90, 43), (90, 57), (84, 68), (73, 76), (59, 80),
-        (39, 79), (25, 74), (16, 66), (12, 54), (13, 41),
+        (14, 23), (13, 16), (14, 7), (16, 2), (21, 2),
+        (33, 9), (44, 7), (58, 7), (70, 9), (82, 2),
+        (87, 2), (89, 8), (90, 16), (88, 23), (94, 33),
+        (96, 43), (95, 54), (92, 63), (85, 70), (75, 74),
+        (61, 76), (42, 76), (28, 74), (18, 70), (11, 64),
+        (7, 54), (6, 43), (8, 33),
     ]
     draw.polygon(silhouette, fill=OUTLINE)
     draw.polygon([
-        (20, 30), (19, 12), (21, 7), (30, 11), (38, 19),
-        (63, 19), (76, 10), (81, 8), (83, 14), (80, 33),
-        (86, 44), (86, 56), (81, 65), (71, 72), (58, 76),
-        (40, 75), (27, 70), (19, 63), (16, 53), (17, 42),
-    ], fill=INK)
-    draw.polygon([(23, 13), (32, 21), (23, 25)], fill="#805d72")
-    draw.polygon([(76, 14), (69, 22), (78, 25)], fill="#805d72")
+        (16, 24), (15, 16), (16, 8), (18, 4), (21, 4),
+        (33, 11), (44, 9), (58, 9), (70, 11), (82, 4),
+        (86, 4), (88, 10), (88, 16), (86, 24), (92, 34),
+        (94, 43), (93, 54), (90, 62), (84, 68), (74, 72),
+        (61, 74), (42, 74), (29, 72), (19, 68), (13, 62),
+        (9, 53), (8, 43), (10, 34),
+    ], fill=FUR)
     draw.polygon([
-        (28, 35), (37, 32), (47, 35), (54, 35), (65, 32),
-        (75, 36), (81, 44), (81, 56), (75, 64), (64, 69),
-        (40, 69), (28, 65), (22, 57), (22, 46),
-    ], fill="#ce9d87")
-    draw.polygon([
-        (29, 36), (38, 35), (47, 38), (55, 38), (65, 35),
-        (74, 38), (78, 45), (78, 55), (73, 61), (63, 65),
-        (40, 65), (30, 62), (25, 56), (25, 46),
+        (25, 37), (31, 34), (43, 35), (59, 35), (71, 34),
+        (78, 37), (83, 44), (85, 52), (83, 61), (78, 66),
+        (68, 69), (54, 70), (40, 69), (29, 67), (22, 62),
+        (19, 54), (20, 46),
     ], fill=CREAM)
     blink = frame in (26, 27)
-    for x in (34, 63):
+    for x in (35, 69):
         if blink:
-            draw.rectangle((x - 3, 48, x + 6, 50), fill="#6d3547")
+            draw.rectangle((x - 5, 49, x + 5, 51), fill="#ad5d50")
         else:
-            draw.ellipse((x - 3, 40, x + 6, 56), fill="#8e4d59")
-            draw.rectangle((x, 43, x + 4, 53), fill="#3c2738")
-            draw.rectangle((x, 42, x + 2, 45), fill="#fff5e8")
-    draw.polygon([(47, 54), (54, 54), (51, 57)], fill="#ac6b6d")
-    draw.line([(47, 60), (50, 62), (54, 60)], fill="#9b5b62", width=1)
-    draw.line([(27, 55), (16, 53)], fill="#977b83")
-    draw.line([(75, 55), (87, 52)], fill="#977b83")
+            draw.ellipse((x - 7, 39, x + 7, 59), fill="#fffef9")
+            draw.ellipse((x - 4, 42, x + 4, 56), fill="#ad5d50")
+    draw.ellipse((50, 57, 53, 60), fill="#ad5d50")
+    draw.line([(47, 63), (49, 65), (53, 65), (56, 62)], fill="#ad5d50", width=1)
+    for points in (
+        [(20, 56), (9, 54), (0, 54)],
+        [(20, 59), (8, 58), (0, 59)],
+        [(83, 56), (95, 54), (106, 55)],
+        [(83, 59), (95, 58), (106, 60)],
+    ):
+        draw.line(points, fill=OUTLINE, width=1)
     return sprite
 
 
@@ -206,7 +208,7 @@ def main():
         image.paste(sprite, (30, 34), sprite)
         ball = soccer_ball(-frame * 10)
         image.paste(ball, (ball_x - 15, ball_y - 15), ball)
-        wave = 17 * math.sin(math.tau * frame / 36)
+        wave = 10 * math.sin(math.tau * frame / 36)
         hand = waving_hand(wave)
         image.paste(hand, (487, 48), hand)
         draw.arc((485, 47, 517, 79), 175, 250, fill="#8baac3", width=2)
